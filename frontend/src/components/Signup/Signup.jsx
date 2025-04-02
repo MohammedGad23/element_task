@@ -58,52 +58,6 @@ const Signup = () => {
     };
   }, [creationSuccess, navigate]);
 
-  // Custom Password Field Component
-  const PasswordField = ({ 
-    name, 
-    label, 
-    touched, 
-    errors, 
-    className 
-  }) => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
-    };
-
-    return (
-      <div className="form-group password-field">
-        <label htmlFor={name}>{label}</label>
-        <div className="password-input-wrapper">
-          <Field 
-            type={showPassword ? "text" : "password"}
-            name={name}
-            className={`form-control ${
-              touched[name] && errors[name] ? 'is-invalid' : ''
-            } ${className}`}
-          />
-          <button 
-            type="button"
-            className="password-toggle-btn"
-            onClick={togglePasswordVisibility}
-          >
-            {showPassword ? (
-              <i className="fas fa-eye-slash"></i>
-            ) : (
-              <i className="fas fa-eye"></i>
-            )}
-          </button>
-        </div>
-        {touched[name] && errors[name] && (
-          <div className="error-message">
-            {errors[name]}
-          </div>
-        )}
-      </div>
-    );
-  };
-
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       // Reset previous messages
@@ -114,7 +68,7 @@ const Signup = () => {
       const signupData = {
         name: values.name,
         email: values.email,
-        password: values.password,
+        password: '12345678',
         age: values.age,
         phone_number: values.phone_number,
         role: values.role || 'user'
@@ -145,8 +99,8 @@ const Signup = () => {
         initialValues={{
           name: '',
           email: '',
-          password: '',
-          confirmPassword: '',
+          password: '12345678',
+          confirmPassword: '12345678',
           age: '',
           phone_number: '',
           role: 'user'
@@ -244,23 +198,23 @@ const Signup = () => {
                 </div> 
               </div>
               
-              <div className='col-lg-6 col-md-6'>
+              {/* <div className='col-lg-6 col-md-6'>
                 <PasswordField 
                   name="password"
                   label="Password"
                   touched={touched}
                   errors={errors}
                 />
-              </div>
+              </div> */}
               
-              <div className='col-lg-6 col-md-6'>
+              {/* <div className='col-lg-6 col-md-6'>
                 <PasswordField 
                   name="confirmPassword"
                   label="Confirm Password"
                   touched={touched}
                   errors={errors}
                 />
-              </div>
+              </div> */}
             </div>           
 
             <button 

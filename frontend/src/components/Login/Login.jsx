@@ -26,7 +26,8 @@ const Login = () => {
         email: values.user,
         password: values.password
       });
-      navigate('/main');
+      // navigate('/main');
+      window.location.href = '/main';
     } catch (error) {
       setLoginError(error.message);
     } finally {

@@ -1,0 +1,63 @@
+.return-book-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.return_book{
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  /* max-width: 500px; */
+} 
+ 
+.return_book {
+  display: flex;
+  flex-direction: column;
+}
+
+.lending-info {
+  display: flex; /* Use flexbox to align items side by side */
+  justify-content: space-between; /* Space between the two sections */
+  margin-bottom: 20px;
+}
+
+.user-info, .book-info {
+  flex: 1; /* Each section takes equal width */
+  margin-right: 20px; /* Space between sections */
+  background-color: white; /* Section background */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info:last-child, .book-info:last-child {
+  margin-right: 0; /* Remove margin from the last section */
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+
+.global-error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.global-success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}

@@ -9,11 +9,14 @@ import Login from './components/Login/Login'; // Create this component
 import Signup from './components/Signup/Signup'; // Create this component
 import Mainpage from './components/Mainpage/Mainpage';
 import ProtectedRoute from './Services/ProtectedRoute';
+import Header from './components/Header/Header';
 
 
 function App() {
   return (
     <Router>
+        <Header />
+    
       <Routes>
          {/* Public Routes */}
          <Route path="/" element={<Home />} />

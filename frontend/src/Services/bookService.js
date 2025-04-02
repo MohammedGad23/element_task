@@ -1,14 +1,10 @@
 import API from './api';
 
-class AuthService {
+class BookService {
   // Login method
-  async login(credentials) {
+  async getAllUsers() {
     try {
-      const response = await API.post('/login', credentials);
-
-      this.setSession(response.data.token);
-      this.setUserInfo(response.data.user);
-      console.log(response.data);
+      const response = await API.get('/users');
       return response;
     } catch (error) {
       this.handleError(error);
@@ -16,65 +12,39 @@ class AuthService {
     }
   }
 
-  // Signup method
-  async signup(userData) {
+  async returnBook(lendData) {
     try {
-      const response = await API.post('/createuser', userData);
-
-      return response;
-    } catch (error) {
-      this.handleError(error);
-      throw error;
-    }
-  }
-
-  // Logout method
-  async logout() {
-    try {
-      console.log(11);
-      const response = await API.post('/logout');
+      const response = await API.post('/return_book', lendData);
       console.log(response);
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
       return response;
-
     } catch (error) {
       this.handleError(error);
       throw error;
     }
-
   }
 
-  // Set authentication session
-  setSession(token) {
-    if (token) {
-      localStorage.setItem('token', token);
-      API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    } else {
-      localStorage.removeItem('token');
-      delete API.defaults.headers.common['Authorization'];
+  async lendingBook(lendData){
+    try {
+      const response = await API.post('/lending_book', lendData);
+      console.log(response);
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
     }
   }
 
-  // Set user information
-  setUserInfo(user) {
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('user');
+  async getLendingInfo(){
+    try {
+      const response = await API.get('/get_lended_book');
+      console.log(response.data)
+      return response;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
     }
   }
 
-  // Get current user
-  getCurrentUser() {
-    const userStr = localStorage.getItem('user');
-    return userStr ? JSON.parse(userStr) : null;
-  }
-
-  // Check if user is authenticated
-  isAuthenticated() {
-    return !!localStorage.getItem('token');
-  }
 
   // Handle authentication errors
   handleError(error) {
@@ -87,17 +57,17 @@ class AuthService {
           errorMessage = 'Invalid credentials';
           break;
         case 401:
-          console.log(error)
           errorMessage = 'Unauthorized. Please login again.';
           // this.logout();
           break;
         case 403:
-          errorMessage = 'Forbidden. You do not have permission.';
+          errorMessage = 'the book not returned.';
           break;
         case 422:
           errorMessage = error.response.data.errors[0];
           break;
         case 500:
+          console.log(error)
           errorMessage = 'Server error. Please try again later.';
           break;
         default:
@@ -117,4 +87,4 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+export default new BookService();

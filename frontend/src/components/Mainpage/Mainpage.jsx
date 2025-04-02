@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import './mainpage.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Signup from '../Signup/Signup';
+import LendingBook from '../LendBook/LendBook'
+import ReturnBook from '../ReturnBook/ReturnBook';
 
 const Mainpage = () => {
-   const navigate = useNavigate();
    const [addUser, setAddUser] = useState(false);
+   const [lendBook, setLendBook] = useState(false);
+   const [returnBook, setReturnBook] = useState(false);
 
-   const createUser = () => {
+
+
+  const createUser = () => {
      setAddUser(true);
+     setLendBook(false);
+    setReturnBook(false);
+
    };
 
-   const handleCloseSignup = () => {
+  const handleCloseSignup = () => {
      setAddUser(false);
    };
+
+  const lendingBook = () => {
+    setLendBook(true);
+    setAddUser(false);
+    setReturnBook(false);
+
+  };
+
+  const handleCloseLending = () => {
+    setLendBook(false);
+  };
+
+  const returnBookToSt = () => {
+    setReturnBook(true);
+    setAddUser(false);
+    setLendBook(false);
+  };
+
+  const handleClosereturn = () => {
+    setReturnBook(false);
+  };
 
    return (
      <div className="home-container">
@@ -35,6 +64,7 @@ const Mainpage = () => {
          <button 
            className='submit-button11'
            style={{backgroundColor: '#FF750F'}}
+           onClick={lendingBook}
          >
            Lending
          </button>
@@ -42,21 +72,14 @@ const Mainpage = () => {
          <button 
            className='submit-button11'
            style={{backgroundColor: '#FF750F'}}
+           onClick={returnBookToSt}
          >
-           Return
-         </button>
-
-         <button 
-           className='submit-button11'
-           style={{backgroundColor: '#FF750F'}}
-         >
-           Review
+           Report & Return
          </button>
        </div>
 
        {/* Conditional Rendering */}
        {addUser && (
-         <div className="signup-modal-overlay">
            <div className="signup-modal-content">
              <button 
                className="close-button" 
@@ -69,7 +92,34 @@ const Mainpage = () => {
                onCancel={handleCloseSignup}
              />
            </div>
-         </div>
+       )}
+       {lendBook && (
+           <div className="signup-modal-content">
+             <button 
+               className="close-button" 
+               onClick={handleCloseLending}
+             >
+               &times;
+             </button>
+             <LendingBook 
+               initialMode="modal" 
+               onCancel={handleCloseLending}
+             />
+           </div>
+       )}
+       {returnBook && (
+           <div className="signup-modal-content">
+             <button 
+               className="close-button" 
+               onClick={handleClosereturn}
+             >
+               &times;
+             </button>
+             <ReturnBook 
+               initialMode="modal" 
+               onCancel={handleClosereturn}
+             />
+           </div>
        )}
      </div>
    );

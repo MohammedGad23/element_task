@@ -14,9 +14,7 @@ const Home = () => {
 //   };
 
   return (
-      
       <div className="home-container1">
-
       <h1 className="title">Welcome to Book Store</h1>
       <p className="sub-title">
         Discover a world of books, stories, and knowledge.
